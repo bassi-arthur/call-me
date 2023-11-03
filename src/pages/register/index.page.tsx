@@ -7,6 +7,7 @@ import { z } from "zod";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { api } from "@/src/lib/axios";
+import { NextSeo } from "next-seo";
 
 const registerFormSchema = z.object({
   username: z
@@ -54,44 +55,47 @@ export default function Register() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Heading as="strong">Conecte a sua agenda!</Heading>
-        <Text>
-          Precisamos de algumas informações para criar seu perfil. Ah, você pode
-          editar essas informações depois.
-        </Text>
-        <MultiStep size={4} currentStep={1} />
-      </Header>
-      <Form as="form" onSubmit={handleSubmit(handleRegister)}>
-        <label>
-          <Text size="sm">Nome de usuario</Text>
-          <TextInput
-            prefix="callme.com/"
-            placeholder="seu-usuario"
-            {...register("username")}
-            crossOrigin={undefined}
-          />
-          {errors.username && (
-            <FormError size="sm">{errors.username.message}</FormError>
-          )}
-        </label>
-        <label>
-          <Text size="sm">Nome de completo</Text>
-          <TextInput
-            placeholder="seu nome"
-            {...register("name")}
-            crossOrigin={undefined}
-          />
-          {errors.name && (
-            <FormError size="sm">{errors.name.message}</FormError>
-          )}
-        </label>
-        <Button type="submit" disabled={isSubmitting}>
-          Proximo passo
-          <ArrowRight />
-        </Button>
-      </Form>
-    </Container>
+    <>
+      <NextSeo title="Crie uma conta | Call-me" description="" />
+      <Container>
+        <Header>
+          <Heading as="strong">Conecte a sua agenda!</Heading>
+          <Text>
+            Precisamos de algumas informações para criar seu perfil. Ah, você
+            pode editar essas informações depois.
+          </Text>
+          <MultiStep size={4} currentStep={1} />
+        </Header>
+        <Form as="form" onSubmit={handleSubmit(handleRegister)}>
+          <label>
+            <Text size="sm">Nome de usuario</Text>
+            <TextInput
+              prefix="callme.com/"
+              placeholder="seu-usuario"
+              {...register("username")}
+              crossOrigin={undefined}
+            />
+            {errors.username && (
+              <FormError size="sm">{errors.username.message}</FormError>
+            )}
+          </label>
+          <label>
+            <Text size="sm">Nome de completo</Text>
+            <TextInput
+              placeholder="seu nome"
+              {...register("name")}
+              crossOrigin={undefined}
+            />
+            {errors.name && (
+              <FormError size="sm">{errors.name.message}</FormError>
+            )}
+          </label>
+          <Button type="submit" disabled={isSubmitting}>
+            Proximo passo
+            <ArrowRight />
+          </Button>
+        </Form>
+      </Container>
+    </>
   );
 }
