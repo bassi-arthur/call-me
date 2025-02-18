@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run services:up && next dev",
+    "services:up": "docker compose -f compose.yml up -d",
+    "services:stop": "docker compose -f compose.yml stop",
+    "services:down": "docker compose -f compose.yml down",
+    "prisma:studio": "npx prisma studio",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
